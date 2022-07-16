@@ -24,18 +24,18 @@ app
 app.use("/api/v1/tasks", taskRouter);
 
 // Connect to the database
-// mongoose.connect(process.env.MONGODB_URI);
-// const db = mongoose.connection;
+mongoose.connect(process.env.MONGODB_URI);
+const db = mongoose.connection;
 
-// db.on("error", (err) => console.error(err));
-// db.once("open", () => {
-//   console.log("Connected to MongoDB");
+db.on("error", (err) => console.error(err));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
 
-//   // Initialize server
-//   app.listen(process.env.PORT, () => {
-//     console.log(`App listening on port ${process.env.PORT}`);
-//   });
-// });
+  // Initialize server
+  app.listen(process.env.PORT, () => {
+    console.log(`App listening on port ${process.env.PORT}`);
+  });
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);
