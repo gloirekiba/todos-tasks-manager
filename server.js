@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 // Import the necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 // Impport routes
 const taskRouter = require("./routes/tasks");
@@ -15,7 +16,9 @@ const taskRouter = require("./routes/tasks");
 const app = express();
 
 // Configure the app
-app.use(express.json());
+app
+  .use(express.json())
+  .use(express.static(path.join(__dirname, "client", "build")));
 
 // Set routes
 app.use("/api/v1/tasks", taskRouter);
